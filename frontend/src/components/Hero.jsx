@@ -51,12 +51,15 @@ export default function Hero() {
               {cascadePhrases.map((phrase, index) => (
                 <span
                   key={index}
-                  className={`inline-block ${
+                  className={`inline-block animate-pulse-glow ${
                     phrase.emphasis === "strong"
                       ? "font-extrabold text-emerald-400"
                       : "font-bold text-emerald-300"
                   }`}
-                  style={glowStyle(phrase.emphasis)}
+                  style={{
+                    ...glowStyle(phrase.emphasis),
+                    animationDelay: `${index * 200}ms`,
+                  }}
                   aria-hidden="true"
                 >
                   {phrase.text}

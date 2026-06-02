@@ -8,24 +8,28 @@ body {
   @apply min-h-screen w-full;
 }
 
+/* ─── GPU-optimised glow pulse ───────────────────────────────────────────────
+   Only animates 'opacity' and 'transform' — both are compositor-thread
+   properties that avoid layout/paint. The visible glow comes from the static
+   inline textShadow which is rasterized once.
+   ──────────────────────────────────────────────────────────────────────────── */
 @keyframes pulse-glow {
   0%,
   100% {
     opacity: 1;
-    text-shadow:
-      0 0 8px rgba(52, 211, 153, 0.4),
-      0 0 20px rgba(6, 182, 212, 0.2);
+    transform: scale(1);
   }
   50% {
-    opacity: 0.85;
-    text-shadow:
-      0 0 16px rgba(52, 211, 153, 0.7),
-      0 0 40px rgba(6, 182, 212, 0.4);
+    opacity: 0.82;
+    transform: scale(1.02);
   }
 }
 
 .animate-pulse-glow {
-  animation: pulse-glow 3s ease-in-out infinite;
+  animation: pulse-glow 600ms ease-out infinite;
+  will-change: transform, opacity;
+  /* Promote to own compositing layer */
+  transform: translateZ(0);
 }
 
 /* ─── Alternate Theme: Violet accent ─── */
