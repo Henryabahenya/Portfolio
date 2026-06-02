@@ -106,7 +106,7 @@ export default function Hero() {
         <div className="absolute bottom-1/3 right-0 w-80 h-80 bg-emerald-500/5 rounded-full blur-3xl" />
       </div>
 
-      <div className="relative w-full max-w-7xl mx-auto px-6 pt-28 pb-12 md:pt-36 lg:py-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div className="relative w-full max-w-7xl mx-auto px-6 pt-24 pb-8 md:pt-36 md:pb-12 lg:py-24 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
         {/* ─── Left Column — Animated Content ─── */}
         <motion.div
           variants={masterContainerVariants}
@@ -239,7 +239,7 @@ export default function Hero() {
           viewport={{ once: false, amount: 0.3 }}
           transition={{ duration: 0.7, delay: 0.4 }}
         >
-          <div className="relative w-full min-h-[550px] md:min-h-[640px]">
+          <div className="relative w-full min-h-[320px] md:min-h-[500px] lg:min-h-[640px]">
             <img
               src={speakingPhoto}
               alt="Espoir speaking at the Hamburg Sustainability Conference"

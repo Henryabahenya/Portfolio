@@ -33,7 +33,7 @@ function App() {
       <Hero />
 
       {/* Portfolio Section */}
-      <section id="portfolio" className="py-16">
+      <section id="portfolio" className="py-10 md:py-16">
         <div className="max-w-7xl mx-auto px-6 mb-10">
           <h2 className="text-3xl font-bold text-white">Impact Portfolio</h2>
           <p className="mt-2 text-slate-400">
@@ -51,7 +51,7 @@ function App() {
       </section>
 
       {/* Speaking Section */}
-      <section id="speaking" className="py-16">
+      <section id="speaking" className="py-10 md:py-16">
         <div className="max-w-7xl mx-auto px-6 mb-10">
           <h2 className="text-3xl font-bold text-white">
             Public Speaking &amp; Engagements
