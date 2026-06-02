@@ -106,7 +106,7 @@ export default function Hero() {
         <div className="absolute bottom-1/3 right-0 w-80 h-80 bg-emerald-500/5 rounded-full blur-3xl" />
       </div>
 
-      <div className="relative w-full max-w-7xl mx-auto px-6 py-12 lg:py-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div className="relative w-full max-w-7xl mx-auto px-6 pt-28 pb-12 md:pt-36 lg:py-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         {/* ─── Left Column — Animated Content ─── */}
         <motion.div
           variants={masterContainerVariants}
