@@ -1,17 +1,6 @@
-import React from "react";
-import { motion } from "framer-motion";
 import speakingPhoto from "../assets/photo1.png";
 
-// =============================================================================
-// NESTED CASCADING ANIMATION SYSTEM — DUAL-LAYER STAGGER ENGINE
-// =============================================================================
-// Layer 1: Master container orchestrates base titles + paragraph (staggerChildren: 0.15s)
-// Layer 2: Nested cascade for green-cyan highlighted phrase blocks (staggerChildren: 0.25s)
-//          with persistent looping motion + glow aesthetics
-// Viewport trigger: once: false, amount: 0.3 — re-triggers on scroll back
-// =============================================================================
-
-// --- LAYER 2 DATA: Cascading phrase blocks ---
+// --- Phrase data for the highlighted intro block ---
 const cascadePhrases = [
   { text: "working", emphasis: "strong" },
   { text: "at the", emphasis: "normal" },
@@ -23,69 +12,7 @@ const cascadePhrases = [
   { text: "Leadership.", emphasis: "strong" },
 ];
 
-// --- LAYER 1: Master container variants ---
-const masterContainerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.1,
-    },
-  },
-};
-
-// --- LAYER 1: Child item variants (titles, paragraph, social) ---
-const masterChildVariants = {
-  hidden: { opacity: 0, y: 24, filter: "blur(4px)" },
-  visible: {
-    opacity: 1,
-    y: 0,
-    filter: "blur(0px)",
-    transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] },
-  },
-};
-
-// --- LAYER 2: Nested cascade container for highlighted phrases ---
-const nestedCascadeContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.45,
-      delayChildren: 0.3,
-    },
-  },
-};
-
-// --- LAYER 2: Individual phrase word entry variant ---
-const phraseWordVariants = {
-  hidden: {
-    opacity: 0,
-    y: 30,
-    scale: 0.85,
-    filter: "blur(6px)",
-  },
-  visible: (index) => ({
-    opacity: 1,
-    y: [0, -6, 0],
-    scale: 1,
-    filter: "blur(0px)",
-    transition: {
-      opacity: { duration: 0.6, ease: "easeOut" },
-      scale: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
-      filter: { duration: 0.6, ease: "easeOut" },
-      y: {
-        repeat: Infinity,
-        duration: 2.8,
-        ease: "easeInOut",
-        delay: index * 0.12,
-      },
-    },
-  }),
-};
-
-// --- Glow styles — uniformly green (emerald only, no cyan/blue) ---
+// --- Glow styles — uniformly green (emerald only) ---
 const glowStyle = (emphasis) =>
   emphasis === "strong"
     ? {
@@ -107,58 +34,39 @@ export default function Hero() {
       </div>
 
       <div className="relative w-full max-w-7xl mx-auto px-6 pt-24 pb-8 md:pt-36 md:pb-12 lg:py-24 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-        {/* ─── Left Column — Animated Content ─── */}
-        <motion.div
-          variants={masterContainerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false, amount: 0.3 }}
-        >
-          {/* LAYER 1 — Title block */}
-          <motion.h1
-            className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-tight md:leading-none mb-6"
-            variants={masterChildVariants}
-          >
+        {/* ─── Left Column — Static Content (animations removed for perf) ─── */}
+        <div>
+          {/* Title block */}
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-tight md:leading-none mb-6">
             Social Entrepreneur &amp; Policy Advocate
-          </motion.h1>
+          </h1>
 
-          {/* LAYER 2 — Nested cascade phrase block */}
-          <motion.div
-            className="mb-8"
-            variants={nestedCascadeContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: false, amount: 0.3 }}
-          >
+          {/* Highlighted phrase block */}
+          <div className="mb-8">
             <span className="sr-only">
               working at the intersection of Child Protection, Climate Action,
               and Global Youth Leadership.
             </span>
             <div className="flex flex-wrap items-baseline gap-x-[0.35em] gap-y-1 text-3xl md:text-4xl lg:text-5xl leading-snug">
               {cascadePhrases.map((phrase, index) => (
-                <motion.span
+                <span
                   key={index}
                   className={`inline-block ${
                     phrase.emphasis === "strong"
                       ? "font-extrabold text-emerald-400"
                       : "font-bold text-emerald-300"
                   }`}
-                  custom={index}
-                  variants={phraseWordVariants}
                   style={glowStyle(phrase.emphasis)}
                   aria-hidden="true"
                 >
                   {phrase.text}
-                </motion.span>
+                </span>
               ))}
             </div>
-          </motion.div>
+          </div>
 
-          {/* LAYER 1 — Description paragraph */}
-          <motion.p
-            className="text-lg text-slate-400 leading-relaxed max-w-xl mb-0"
-            variants={masterChildVariants}
-          >
+          {/* Description paragraph */}
+          <p className="text-lg text-slate-400 leading-relaxed max-w-xl mb-0">
             Driving measurable impact through strategic partnerships with{" "}
             <a
               href="https://www.unicef.org"
@@ -188,13 +96,10 @@ export default function Hero() {
             </a>{" "}
             &mdash; building scalable programs that empower communities and
             influence policy across Sub-Saharan Africa.
-          </motion.p>
+          </p>
 
-          {/* LAYER 1 — Social Links */}
-          <motion.div
-            className="flex items-center gap-4 mt-8"
-            variants={masterChildVariants}
-          >
+          {/* Social Links */}
+          <div className="flex items-center gap-4 mt-8">
             <a
               href="https://www.instagram.com/espy_stark?igsh=MTFhdGtnb2tpOTI0Zw=="
               target="_blank"
@@ -228,17 +133,11 @@ export default function Hero() {
               </svg>
               <span>Facebook</span>
             </a>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
         {/* ─── Right Column — Speaker Photo ─── */}
-        <motion.div
-          className="flex items-center justify-center"
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: false, amount: 0.3 }}
-          transition={{ duration: 0.7, delay: 0.4 }}
-        >
+        <div className="flex items-center justify-center">
           <div className="relative w-full min-h-[320px] md:min-h-[500px] lg:min-h-[640px]">
             <img
               src={speakingPhoto}
@@ -247,7 +146,7 @@ export default function Hero() {
               loading="eager"
             />
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
