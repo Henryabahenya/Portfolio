@@ -32,7 +32,7 @@ app.use("/api/projects", require("./routes/projectRoutes"));
 app.use("/api/speaking", require("./routes/speakingRoutes"));
 
 // SPA catch-all: serve index.html for any non-API route
-app.get("*", (req, res) => {
+app.get("/:any*", (req, res) => {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
